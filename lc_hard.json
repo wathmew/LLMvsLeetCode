@@ -16,7 +16,7 @@
         "skeleton": "\\ndef largestRectangleArea(self, heights: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef largestRectangleArea(self, heights: List[int]) -> int:\\n        stack = [-1]\\n        max_area = 0\\n\\n        for i in range(len(heights)):\\n            while stack[-1] != -1 and heights[i] <= heights[stack[-1]]:\\n                height = heights[stack.pop()]\\n                width = i - stack[-1] - 1\\n                max_area = max(max_area, height * width)\\n            stack.append(i)\\n        \\n        while stack[-1] != -1:\\n            height = heights[stack.pop()]\\n            width = len(heights) - stack[-1] - 1\\n            max_area = max(max_area, height * width)\\n        \\n        return max_area\\n"
         ],
         "test": {
             "input": [],
@@ -28,7 +28,7 @@
         "skeleton": "\\ndef findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:\\n        def find_mean(nums):\\n            mid = int(len(nums)/2)\\n            if len(nums)%2==0:\\n                return (nums[mid]+nums[mid-1])/2\\n            else:\\n                return nums[mid]/1\\n            \\n       \\n        l1= len(nums1)\\n        l2= len(nums2)\\n        final_num = [0]*int(((l1+l2)/2)+1)\\n        mid = len(final_num)\\n\\n        if l1==0:\\n            return find_mean(nums2)\\n        if l2==0:\\n            return find_mean(nums1)\\n        i,j,k=0,0,0\\n        while k<mid:\\n\\n            if   i<l1 and (j>=l2 or nums1[i]<=nums2[j]):\\n                final_num[k]=nums1[i]\\n                i+=1\\n                k+=1\\n            elif j<l2 and (i>=l1 or nums2[j]<=nums1[i]):\\n                final_num[k]=nums2[j]\\n                j+=1\\n                k+=1\\n        \\n        if (l1+l2)%2==0:\\n            return sum(final_num[-2:])/2\\n        else: return sum(final_num[-1:])/1\\n"
         ],
         "test": {
             "input": [],
@@ -40,7 +40,7 @@
         "skeleton": "\\ndef minWindow(self, s: str, t: str) -> str:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef minWindow(self, s: str, t: str) -> str:\\n        if len(s) < len(t):\\n            return \\\"\\\"\\n        \\n        char_count = defaultdict(int)\\n        for ch in t:\\n            char_count[ch] += 1\\n        \\n        target_chars_remaining = len(t)\\n        min_window = (0, float(\\\"inf\\\"))\\n        start_index = 0\\n\\n        for end_index, ch in enumerate(s):\\n            if char_count[ch] > 0:\\n                target_chars_remaining -= 1\\n            char_count[ch] -= 1\\n\\n            if target_chars_remaining == 0:\\n                while True:\\n                    char_at_start = s[start_index]\\n                    if char_count[char_at_start] == 0:\\n                        break\\n                    char_count[char_at_start] += 1\\n                    start_index += 1\\n                \\n                if end_index - start_index < min_window[1] - min_window[0]:\\n                    min_window = (start_index, end_index)\\n                \\n                char_count[s[start_index]] += 1\\n                target_chars_remaining += 1\\n                start_index += 1\\n        \\n        return \\\"\\\" if min_window[1] > len(s) else s[min_window[0]:min_window[1]+1]\\n"
         ],
         "test": {
             "input": [],
@@ -52,7 +52,7 @@
         "skeleton": "\\ndef maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:\\n        res = []\\n        q = deque()\\n\\n        for idx, num in enumerate(nums):\\n            while q and q[-1] < num:\\n                q.pop()\\n            q.append(num)\\n\\n            if idx >= k and nums[idx - k] == q[0]:\\n                q.popleft()\\n            \\n            if idx >= k - 1:\\n                res.append(q[0])\\n        \\n        return res\\n"
         ],
         "test": {
             "input": [],
@@ -64,7 +64,7 @@
         "skeleton": "\\n# Definition for singly-linked list.\\n# class ListNode:\\n#     def __init__(self, val=0, next=None):\\n#         self.val = val\\n#         self.next = next\\ndef mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\\n        li=[]\\n        for i in range(0,len(lists)):\\n            temp=lists[i]\\n            while(temp!=None):\\n                li.append(temp.val)\\n                temp=temp.next\\n        li.sort()\\n        head=ListNode(None)\\n        for i in li:\\n            nn=ListNode(i)\\n            if head==None:\\n                head=nn\\n                continue\\n            temp=head\\n            while(temp.next!=None):\\n                temp=temp.next\\n            temp.next=nn\\n        print(li)\\n        return head.next\\n"
         ],
         "test": {
             "input": [],
@@ -76,7 +76,7 @@
         "skeleton": "\\n# Definition for singly-linked list.\\n# class ListNode:\\n#     def __init__(self, val=0, next=None):\\n#         self.val = val\\n#         self.next = next\\ndef reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:\\n        \\n        if not head: return None\\n\\n        if k == 1: \\n            return head\\n\\n        end_check = head        \\n        for _ in range(k-1):\\n            if not end_check.next: \\n                return head\\n            end_check = end_check.next\\n        \\n        # if not end_check: return head\\n\\n        blank = ListNode(0)\\n        p0, p1, count = blank, head, 0\\n\\n        while count < k:\\n            curr = p1\\n            p2 = curr.next\\n            curr.next = p0\\n            p0 = p1\\n            p1 = p2\\n            count += 1\\n\\n        head.next = self.reverseKGroup(p2, k)\\n        head = p0\\n\\n        return head\\n"
         ],
         "test": {
             "input": [],
@@ -88,7 +88,7 @@
         "skeleton": "\\n# Definition for a binary tree node.\\n# class TreeNode:\\n#     def __init__(self, val=0, left=None, right=None):\\n#         self.val = val\\n#         self.left = left\\n#         self.right = right\\ndef maxPathSum(self, root: Optional[TreeNode]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef traverse(self, node, storer):\\n        if not node:\\n            return 0\\n        left = self.traverse(node.left, storer)\\n        right = self.traverse(node.right, storer)\\n        if left<0:\\n            left = 0\\n        if right < 0:\\n            right = 0\\n        storer.append(left + right + node.val)\\n        return max(left,right) + node.val\\n\\n    def maxPathSum(self, root: Optional[TreeNode]) -> int:\\n        maxStorer = []\\n        self.traverse(root, maxStorer)\\n        return max(maxStorer)\\n"
         ],
         "test": {
             "input": [],
@@ -100,7 +100,7 @@
         "skeleton": "\\ndef reversePairs(self, nums: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef reversePairs(self, nums: List[int]) -> int:\\n        N = len(nums)\\n        tot = 0\\n        sorted_right_side = [nums[-1]*2]\\n        for j in range(N-2,-1,-1):\\n\\n            n = nums[j]\\n            # count of numbers that are < 2 * n\\n            tot += bisect.bisect_left(sorted_right_side,n)\\n\\n            bisect.insort(sorted_right_side, n*2)\\n\\n\\n        return tot\\n"
         ],
         "test": {
             "input": [],
@@ -112,7 +112,7 @@
         "skeleton": "\\ndef findWords(self, board: List[List[str]], words: List[str]) -> List[str]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef findWords(self, board: List[List[str]], words: List[str]) -> List[str]:\\n    \\n    def exist(word: str) -> bool:\\n        if len(word) > len(board[0]) * len(board):\\n            return False\\n        \\n        def backtracking(i, j, word_idx: int) -> bool:\\n            if word_idx == len(word):\\n                return True\\n            \\n            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0])\\n                return False # went out of borders\\n\\n            elif board[i][j] != word[word_idx]:\\n                return False # current letter does not match\\n            \\n            buff, board[i][j] = board[i][j], '#'\\n            res = (\\n                backtracking(i + 1, j, word_idx + 1) or\\n                backtracking(i - 1, j, word_idx + 1) or\\n                backtracking(i, j + 1, word_idx + 1) or\\n                backtracking(i, j - 1, word_idx + 1)\\n            )\\n\\n            board[i][j] = buff\\n            return res\\n        \\n        for i in range(len(board)):\\n            for j in range(len(board[i])):\\n                if backtracking(i, j, 0):\\n                    return True\\n        return False\\n\\n    res = []\\n\\n    for word in words:\\n        if exist(word):\\n            res.append(word)\\n    return res\\n"
         ],
         "test": {
             "input": [],
@@ -124,7 +124,7 @@
         "skeleton": "\\ndef solveNQueens(self, n: int) -> List[List[str]]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef solveNQueens(self, n: int) -> List[List[str]]:\\n        def backtrack(r):\\n            if r == n:\\n                copy = board[:]\\n                sol = []\\n                for c in copy:\\n                    sol.append(\\\"\\\".join(c[:]))\\n                ans.append(sol)\\n                return\\n\\n            for c in range(n):\\n                if c in placedCol or r + c in placedPos or r - c in placedNeg: continue\\n\\n                board[r][c] = \\\"Q\\\"\\n                placedCol.add(c)\\n                placedPos.add(r + c)\\n                placedNeg.add(r - c)\\n\\n                backtrack(r + 1)\\n\\n                board[r][c] = \\\".\\\"\\n                placedCol.remove(c)\\n                placedPos.remove(r + c)\\n                placedNeg.remove(r - c)\\n\\n        board = [[\\\".\\\"] * n for _ in range(n)]\\n        \\n        placedCol = set()\\n        placedPos = set()\\n        placedNeg = set()\\n        ans = []\\n        backtrack(0)\\n        return ans\\n"
         ],
         "test": {
             "input": [],
@@ -136,7 +136,7 @@
         "skeleton": "\\ndef jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\n    def find(self, i, job, startTime, n, dp):\\n        if i >= n:\\n            return 0\\n        if dp[i] != -1:\\n            return dp[i]\\n\\n        index = startTime.index(job[i][1])\\n\\n        pick = job[i][2] + self.find(index, job, startTime, n, dp)\\n        notpick = self.find(i + 1, job, startTime, n, dp)\\n        dp[i] = max(pick, notpick)\\n        return dp[i]\\n\\n    def jobScheduling(self, startTime, endTime, profit):\\n        n = len(startTime)\\n        job = [[startTime[i], endTime[i], profit[i]] for i in range(n)]\\n        dp = [-1] * n\\n\\n        job.sort(key=lambda x: x[1])\\n        startTime.sort()\\n\\n        return self.find(0, job, startTime, n, dp)\\n"
         ],
         "test": {
             "input": [],
@@ -148,7 +148,7 @@
         "skeleton": "\\ndef ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\n def ladderLength(self, beginWord:str,endWord:str,wordList: List[str])->int:\\n        q = deque();\\n        q.append((beginWord,1));\\n        hmap = defaultdict(int)\\n        for word in wordList: hmap[word] = 1;\\n        hmap[beginWord] = 0\\n        while( len(q) > 0 ):\\n            #print(q);\\n            word = q.popleft();\\n            wordl = list(word[0])\\n            if( word[1] > 1 and word[0] == endWord):\\n                return word[1]\\n            for i in range(0,len(wordl)):\\n                t = wordl[i]\\n                for j in range(0,ord('z')-ord('a') + 1):\\n                    wordl[i] = chr( ord('a') + j );\\n                    tword = ''.join(wordl)\\n                    if( hmap[tword] == 1 and tword != word[0] ):\\n                        q.append( (tword,word[1]+1) );\\n                        hmap[tword] = 0;\\n                wordl[i] = t\\n                    \\n        return 0;\\n"
         ],
         "test": {
             "input": [],
@@ -160,7 +160,7 @@
         "skeleton": "\\ndef minInterval(self, intervals: List[List[int]], queries: List[int]) -> List[int]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef minInterval(self, intervals: List[List[int]], queries: List[int]) -> List[int]:\\n        ans = [-1]*len(queries)\\n\\n        intervals.sort()\\n        qidxs = list(range(len(queries)))\\n        qidxs.sort(key=lambda i: queries[i])\\n\\n        k = 0 # next interval index to push\\n        ivals = [] # (size, start, end) for all intervals containing next query, min heap by size\\n        for i in qidxs:\\n            q = queries[i]\\n\\n            while ivals and ivals[0][2] < q: heappop(ivals)\\n            \\n            while k < len(intervals) and intervals[k][0] <= q:\\n                if intervals[k][1] >= q:\\n                    # skip intervals that start later, but have already ended\\n                    # (we'd pop them to maintain RI anyway)\\n                    heappush(ivals, (intervals[k][1]-intervals[k][0]+1, intervals[k][0], intervals[k][1]))\\n                k += 1\\n\\n            if ivals:\\n                ans[i] = ivals[0][0]\\n\\n        return ans\\n"
         ],
         "test": {
             "input": [],
@@ -172,7 +172,7 @@
         "skeleton": "\\ndef findItinerary(self, tickets: List[List[str]]) -> List[str]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef findItinerary(self, tickets: List[List[str]]) -> List[str]:\\n        flight_map = collections.defaultdict(list)\\n        result = []\\n\\n        # Populate the flight map with each departure and arrival\\n        for departure, arrival in tickets:\\n            flight_map[departure].append(arrival)\\n\\n        # Sort each list of destinations in reverse lexicographical order\\n        for departure in flight_map:\\n            flight_map[departure].sort(reverse=True)\\n\\n        # Perform DFS traversal\\n        def dfsTraversal(current):\\n            destinations = flight_map[current]\\n\\n            # Traverse all destinations in the order of their lexicographical\\n            # sorting\\n            while destinations:\\n                next_destination = destinations.pop()\\n                dfsTraversal(next_destination)\\n\\n            # Append the current airport to the result after all destinations\\n            # are visited\\n            result.append(current)\\n\\n        dfsTraversal(\\\"JFK\\\")\\n        return result[::-1]\\n\\n"
         ],
         "test": {
             "input": [],
@@ -184,7 +184,7 @@
         "skeleton": "\\ndef swimInWater(self, grid: List[List[int]]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef swimInWater(self, grid: List[List[int]]) -> int:\\n        N = len(grid)\\n        visit = set()\\n        directions = [[0,1],[0,-1],[1,0],[-1,0]]\\n        minH = [[grid[0][0],0,0]]\\n        visit.add((0,0))\\n        while minH:\\n            t,r,c = heapq.heappop(minH)\\n            if r == N-1 and c == N-1:\\n                return t\\n            for dr,dc in directions:\\n                neiR , neiC = r+dr , c+dc\\n                if (neiR < 0 or neiC < 0 or neiR >= N or neiC >= N or (neiR,neiC) in visit):\\n                    continue\\n                visit.add((neiR,neiC))\\n                heapq.heappush(minH,[max(t,grid[neiR][neiC]), neiR, neiC])\\n"
         ],
         "test": {
             "input": [],
@@ -196,7 +196,7 @@
         "skeleton": "\\ndef longestIncreasingPath(self, matrix: List[List[int]]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef longestIncreasingPath(self, matrix: List[List[int]]) -> int:\\n        dp = {}\\n        rows, cols = len(matrix), len(matrix[0])\\n        nbr = [[0,1],[0,-1],[1,0],[-1,0]]\\n\\n        def longest_path(r1, c1):\\n            if (r1,c1) in dp:\\n                return dp[(r1,c1)]\\n            max_path = 1\\n            for [dr,dc] in nbr:\\n                nr, nc = r1+dr, c1+dc\\n                if nr>=0 and nr<rows and nc>=0 and nc<cols:\\n                    if matrix[nr][nc] > matrix[r1][c1]:\\n                        max_path = max(max_path, 1+longest_path(nr,nc))\\n            dp[(r1,c1)] = max_path\\n            return dp[(r1,c1)]\\n\\n        ans = 1\\n        for r in range(rows):\\n            for c in range(cols):\\n                path_l = longest_path(r,c)\\n                ans = max(ans, path_l)\\n        return ans\\n"
         ],
         "test": {
             "input": [],
@@ -208,7 +208,7 @@
         "skeleton": "\\ndef numDistinct(self, s: str, t: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef numDistinct(self, s: str, t: str) -> int:\\n        @cache\\n        def rec(i,j):\\n            if i == n:\\n                return 1\\n            if j == m:\\n                return 0\\n            ans = 0\\n            if t[i] == s[j]:\\n                ans += rec(i+1,j+1)\\n            ans += rec(i,j+1)\\n            return ans\\n        n,m = len(t),len(s)\\n        return rec(0,0)      \\n"
         ],
         "test": {
             "input": [],
@@ -220,7 +220,7 @@
         "skeleton": "\\ndef maxCoins(self, nums: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxCoins(self, nums: List[int]) -> int:\\n\\n        nums.insert(0,1)\\n        nums.append(1)\\n\\n        def recursive(i, j, memo):\\n            if i == j:\\n                return 0\\n            if (i,j) in memo:\\n                return memo[(i,j)]\\n            max_cost = float('-inf')\\n            for k in range(i, j):\\n                curr_cost = nums[i-1] * nums[k] * nums[j]\\n                left_cost = recursive(i, k, memo)\\n                right_cost = recursive(k+1, j, memo)\\n                max_cost = max(max_cost, curr_cost + left_cost + right_cost)\\n            memo[(i,j)] = max_cost\\n            return max_cost\\n        \\n        memo = {}\\n        return recursive(1, len(nums)-1, memo)\\n"
         ],
         "test": {
             "input": [],
@@ -232,7 +232,7 @@
         "skeleton": "\\ndef isMatch(self, s: str, p: str) -> bool:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef isMatch(self, s: str, p: str) -> bool:\\n        m, n = len(s), len(p)\\n        dp = [[False] * (n + 1) for _ in range(m + 1)]\\n        dp[0][0] = True\\n        for j in range(2, n + 1):\\n            if p[j - 1] == '*':\\n                dp[0][j] = dp[0][j - 2]\\n        for i in range(1, m + 1):\\n            for j in range(1, n + 1):\\n                if p[j - 1] == '*':\\n                    dp[i][j] = dp[i][j - 2] or (dp[i - 1][j] and (s[i - 1] == p[j - 2] or p[j - 2] == '.'))\\n                else:\\n                    dp[i][j] = dp[i - 1][j - 1] and (s[i - 1] == p[j - 1] or p[j - 1] == '.')\\n        return dp[m][n]\\n"
         ],
         "test": {
             "input": [],
@@ -244,7 +244,7 @@
         "skeleton": "\\ndef solveSudoku(self, board: List[List[str]]) -> None:\\n    #Do not return anything, modify board in-place instead.\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef solveSudoku(self, board: List[List[str]]) -> None:\\n        \\n        # Do not return anything, modify board in-place instead.\\n        \\n\\n        def isgood(board, row, col, i):\\n            for j in board[row]:\\n                if j == str(i):\\n                    return False\\n\\n            for j in range(9):\\n                if board[j][col] == str(i):\\n                    return False\\n\\n            temprow = (row // 3) * 3\\n            tempcol = (col // 3) * 3\\n\\n            for a in range(temprow, temprow + 3):\\n                for b in range(tempcol, tempcol + 3):\\n                    if board[a][b] == str(i):\\n                        return False\\n\\n            return True\\n\\n        dot = 0\\n        for line in board:\\n            for i in line:\\n                if i == \\\".\\\":\\n                    dot += 1\\n\\n        def help(board, row, col):\\n\\n            if row == 9:\\n                return True\\n\\n            nextrow = row\\n            nextcol = col\\n\\n            if col == 9:\\n                return help(board, row + 1, 0)\\n\\n            if board[row][col] != \\\".\\\":\\n                return help(board, row, col + 1)\\n\\n            for i in range(1, 10):\\n                if isgood(board, row, col, i):\\n                    board[row][col] = str(i)\\n                    if help(board, nextrow, nextcol):\\n                        return True\\n                    else:\\n                        board[row][col] = \\\".\\\"\\n\\n        help(board, 0, 0)\\n"
         ],
         "test": {
             "input": [],
@@ -256,7 +256,7 @@
         "skeleton": "\\ndef minCut(self, s: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef minCut(self, s: str) -> int:\\n        n = len(s)\\n        \\n        # Step 1: Preprocess the string to determine which substrings are palindromes\\n        dp = [[False]*n for _ in range(n)]\\n        for i in range(n):\\n            dp[i][i] = True\\n        for i in range(n-1):\\n            if s[i] == s[i+1]:\\n                dp[i][i+1] = True\\n        for l in range(3, n+1):\\n            for i in range(n-l+1):\\n                j = i+l-1\\n                if s[i] == s[j] and dp[i+1][j-1]:\\n                    dp[i][j] = True\\n        \\n        # Step 2: Use dynamic programming to determine the minimum cuts needed\\n        cuts = list(range(n))\\n        for i in range(1, n):\\n            if dp[0][i]:\\n                cuts[i] = 0\\n            else:\\n                for j in range(i):\\n                    if dp[j+1][i]:\\n                        cuts[i] = min(cuts[i], cuts[j]+1)\\n        \\n        # Step 3: Return the final answer\\n        return cuts[-1]\\n"
         ],
         "test": {
             "input": [],
@@ -268,7 +268,7 @@
         "skeleton": "\\ndef maxProfit(self, k: int, prices: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxProfit(self, k: int, prices: List[int]) -> int:\\n        if k == 0: return 0\\n        dp = [[1000, 0] for _ in range(k + 1)]\\n        for price in prices:\\n            for i in range(1, k + 1):\\n                dp[i][0] = min(dp[i][0], price - dp[i - 1][1])\\n                dp[i][1] = max(dp[i][1], price - dp[i][0])\\n        return dp[k][1]\\n"
         ],
         "test": {
             "input": [],
@@ -280,7 +280,7 @@
         "skeleton": "\\ndef calculate(self, s: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef calculate(self, s: str) -> int:\\n        number = 0\\n        sign_value = 1\\n        result = 0\\n        operations_stack = []\\n\\n        for c in s:\\n            if c.isdigit():\\n                number = number * 10 + int(c)\\n            elif c in \\\"+-\\\":\\n                result += number * sign_value\\n                sign_value = -1 if c == '-' else 1\\n                number = 0\\n            elif c == '(':\\n                operations_stack.append(result)\\n                operations_stack.append(sign_value)\\n                result = 0\\n                sign_value = 1\\n            elif c == ')':\\n                result += sign_value * number\\n                result *= operations_stack.pop()\\n                result += operations_stack.pop()\\n                number = 0\\n\\n        return result + number * sign_value\\n"
         ],
         "test": {
             "input": [],
@@ -292,7 +292,7 @@
         "skeleton": "\\ndef removeInvalidParentheses(self, s: str) -> List[str]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef removeInvalidParentheses(self, s: str) -> List[str]:\\n        def is_valid(s):\\n            count = 0\\n            for char in s:\\n                if char == '(':\\n                    count += 1\\n                elif char == ')':\\n                    count -= 1\\n                if count < 0:\\n                    return False\\n            return count == 0\\n    \\n        result = []\\n        queue = deque([(s, 0)])\\n        visited = set([s])\\n        found = False\\n    \\n        while queue:\\n            current, removals = queue.popleft()\\n        \\n            if is_valid(current):\\n                result.append(current)\\n                found = True\\n            elif found:\\n                continue\\n        \\n            for i in range(len(current)):\\n                if current[i] not in '()':\\n                    continue\\n                next_str = current[:i] + current[i+1:]\\n                if next_str not in visited:\\n                    visited.add(next_str)\\n                    queue.append((next_str, removals + 1))\\n    \\n        return result\\n"
         ],
         "test": {
             "input": [],
@@ -304,7 +304,7 @@
         "skeleton": "\\ndef maxCoins(self, nums: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxCoins(self, nums: List[int]) -> int:\\n\\n        nums.insert(0,1)\\n        nums.append(1)\\n\\n        def recursive(i, j, memo):\\n            if i == j:\\n                return 0\\n            if (i,j) in memo:\\n                return memo[(i,j)]\\n            max_cost = float('-inf')\\n            for k in range(i, j):\\n                curr_cost = nums[i-1] * nums[k] * nums[j]\\n                left_cost = recursive(i, k, memo)\\n                right_cost = recursive(k+1, j, memo)\\n                max_cost = max(max_cost, curr_cost + left_cost + right_cost)\\n            memo[(i,j)] = max_cost\\n            return max_cost\\n        \\n        memo = {}\\n        return recursive(1, len(nums)-1, memo)\\n"
         ],
         "test": {
             "input": [],
@@ -316,7 +316,7 @@
         "skeleton": "\\ndef countSmaller(self, nums: List[int]) -> List\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef countSmaller(self, nums: List[int]) -> List[int]:\\n        l = len(nums)\\n        \\n        ans = array('i', bytes(len(nums) << 2))\\n        \\n        nums2 = array('h')\\n\\n        for i in range(l-1,-1,-1):\\n          n = nums.pop()\\n          lpos = bisect_left(nums2, n)\\n          ans[i] = lpos\\n          nums2.insert(lpos, n)\\n\\n        return ans\\n"
         ],
         "test": {
             "input": [],
@@ -328,7 +328,7 @@
         "skeleton": "\\ndef maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:\\n        def get_max_subseq(nums, k):\\n            stack = []\\n            for i, num in enumerate(nums):\\n                while stack and len(nums) - i + len(stack) > k and stack[-1] < num:\\n                    stack.pop()\\n                if len(stack) < k:\\n                    stack.append(num)\\n            return stack\\n        \\n        def merge(nums1, nums2):\\n            merged = []\\n            i, j = 0, 0\\n            while i < len(nums1) or j < len(nums2):\\n                if i >= len(nums1):\\n                    merged.append(nums2[j])\\n                    j += 1\\n                elif j >= len(nums2):\\n                    merged.append(nums1[i])\\n                    i += 1\\n                elif nums1[i:] > nums2[j:]:\\n                    merged.append(nums1[i])\\n                    i += 1\\n                else:\\n                    merged.append(nums2[j])\\n                    j += 1\\n            return merged\\n        \\n        ans = []\\n        for i in range(max(0, k - len(nums2)), min(len(nums1), k) + 1):\\n            j = k - i\\n            subseq1 = get_max_subseq(nums1, i)\\n            subseq2 = get_max_subseq(nums2, j)\\n            merged = merge(subseq1, subseq2)\\n            ans = max(ans, merged)\\n        return ans\\n"
         ],
         "test": {
             "input": [],
@@ -340,7 +340,7 @@
         "skeleton": "\\ndef countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:\\n        prefix = nums.copy()\\n        for i in range(1, len(nums)):\\n            prefix[i] += prefix[i-1]\\n        self.count = 0\\n        for n in prefix:\\n            if lower <= n <= upper:\\n                self.count += 1\\n        \\n        def merge(left_arr, right_arr):\\n            start, end = 0, 0 \\n            for i in range(len(left_arr)):\\n                while start < len(right_arr) and right_arr[start] - left_arr[i] < lower:\\n                    start += 1\\n                while end < len(right_arr) and right_arr[end] - left_arr[i] <= upper:\\n                    end += 1\\n                self.count += end - start\\n\\n            l, r = 0, 0\\n            sorted_arr = []\\n            while l < len(left_arr) and r < len(right_arr):\\n                if left_arr[l] < right_arr[r]:\\n                    sorted_arr.append(left_arr[l])\\n                    l += 1\\n                else:\\n                    sorted_arr.append(right_arr[r])\\n                    r += 1\\n            return sorted_arr + left_arr[l:] + right_arr[r:]\\n        \\n        def divide(arr):\\n            if len(arr) <= 1: return arr\\n            mid = len(arr)//2\\n            left_arr = divide(arr[:mid])\\n            right_arr = divide(arr[mid:])\\n            return merge(left_arr, right_arr)\\n\\n        divide(prefix)\\n        return self.count\\n        \\n"
         ],
         "test": {
             "input": [],
@@ -352,7 +352,7 @@
         "skeleton": "\\ndef minPatches(self, nums: List[int], n: int) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef minPatches(self, nums: List[int], n: int) -> int:\\n        miss = 1\\n        result = 0\\n        i = 0\\n\\n        while miss <= n:\\n            if i < len(nums) and nums[i] <= miss:\\n                miss += nums[i]\\n                i += 1\\n            else:\\n                miss += miss\\n                result += 1\\n\\n        return result\\n"
         ],
         "test": {
             "input": [],
@@ -364,7 +364,7 @@
         "skeleton": "\\ndef maxEnvelopes(self, envelopes: List[List[int]]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxEnvelopes(self, envelopes: List[List[int]]) -> int:\\n        envelopes.sort(key=lambda x: (x[0], -x[1]))\\n        \\n        res = []\t\t\\n\t\t# Perform LIS\\n        for _, h in envelopes:\\n            l,r=0,len(res)-1\\n\t\t\t# find the insertion point in the Sort order\\n            while l <= r:\\n                mid=(l+r)>>1\\n                if res[mid]>=h:\\n                    r=mid-1\\n                else:\\n                    l=mid+1        \\n            idx = l\\n            if idx == len(res):\\n                res.append(h)\\n            else:\\n                res[idx]=h\\n        return len(res)\\n"
         ],
         "test": {
             "input": [],
@@ -376,7 +376,7 @@
         "skeleton": "\\ndef canCross(self, stones: List[int]) -> bool:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef canCross(self, stones: List[int]) -> bool:\\n\\n        if stones[1] != 1:\\n            return False\\n\\n        def dfs(i, k):\\n            if i == len(stones) - 1:\\n                return True\\n\\n            if (i, k) in dp:\\n                 return dp[(i, k)]\\n\\n            res = False\\n            for j in range(i + 1, len(stones)):\\n                if stones[i] + k == stones[j]:\\n                    res = res or dfs(j, k)\\n                if stones[i] + k + 1 == stones[j]:\\n                    res = res or dfs(j, k + 1)\\n                if stones[i] + k - 1 == stones[j]:\\n                    res = res or dfs(j, k - 1)\\n\\n            dp[(i, k)] = res\\n            return res\\n        \\n        dp = {}\\n        return dfs(1, 1)\\n"
         ],
         "test": {
             "input": [],
@@ -388,7 +388,7 @@
         "skeleton": "\\ndef strongPasswordChecker(self, password: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef strongPasswordChecker(self, password: str) -> int:\\n        unique_chars = set(password)\\n        password_length = len(password)\\n\\n        required_categories = 3 - (bool(unique_chars & set(ascii_lowercase)) + \\n                                   bool(unique_chars & set(ascii_uppercase)) +\\n                                   bool(unique_chars & set('0123456789')))\\n\\n        if password_length < 6:\\n            return max(6 - password_length, required_categories)\\n\\n        consecutive_repeats = [len(list(g)) for _, g in groupby(password)]\\n        long_repeats = [length for length in consecutive_repeats if length > 2]\\n\\n        if password_length > 20:\\n            long_repeats = [(length % 3, length) for length in long_repeats]\\n            heapify(long_repeats)\\n            for _ in range(password_length - 20):\\n                if not long_repeats:\\n                    break\\n                _, length = heappop(long_repeats)\\n                if length > 3:\\n                    heappush(long_repeats, ((length - 1) % 3, length - 1))\\n            long_repeats = [length for _, length in long_repeats]\\n\\n        return max(required_categories, sum(length // 3 for length in long_repeats)) + max(0, password_length - 20)\\n"
         ],
         "test": {
             "input": [],
@@ -400,7 +400,7 @@
         "skeleton": "\\ndef findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\n def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:\\n        max_profit=[]\\n        min_capital=[(c,p) for c,p in zip(capital,profits)]\\n        heapq.heapify(min_capital) \\n        for i in range(k):\\n            while min_capital and min_capital[0][0]<=w:\\n                c,p=heapq.heappop(min_capital) \\n                heapq.heappush(max_profit,-1*p)\\n            if not max_profit:\\n                break\\n            w+=-1*heapq.heappop(max_profit)\\n        return w\\n"
         ],
         "test": {
             "input": [],
@@ -412,7 +412,7 @@
         "skeleton": "\\ndef findRotateSteps(self, ring: str, key: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef findRotateSteps(self, ring: str, key: str) -> int:\\n        n = len(ring)\\n        matches = {}\\n        for i in range(n):\\n            matches.setdefault(ring[i], []).append(i)\\n        \\n        pos_cost = [(0, 0)]\\n        for ch in key:\\n            pos_cost_curr = []\\n            for curr_pos in matches[ch]:\\n                curr_cost = float('inf')\\n                for pos, cost in pos_cost:\\n                    clkwise_trans_cost = abs(pos - curr_pos)\\n                    temp_cost = cost + min(clkwise_trans_cost, n - clkwise_trans_cost)\\n                    curr_cost = min(curr_cost, temp_cost)\\n                pos_cost_curr.append((curr_pos, curr_cost))\\n            pos_cost = pos_cost_curr\\n        \\n        min_cost = float('inf')\\n        for pos, cost in pos_cost:\\n            min_cost = min(min_cost, cost)\\n        \\n        return min_cost + len(key)\\n"
         ],
         "test": {
             "input": [],
@@ -424,7 +424,7 @@
         "skeleton": "\\ndef findMinMoves(self, machines: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef findMinMoves(self, machines: List[int]) -> int:\\n        n = len(machines)\\n        total_dresses = sum(machines)\\n        \\n        if total_dresses % n != 0:\\n            return -1\\n        \\n        target_dresses = total_dresses // n\\n        moves = 0\\n        dresses_so_far = 0\\n        \\n        for i in range(n):\\n            dresses_so_far += machines[i] - target_dresses\\n            moves = max(moves, abs(dresses_so_far), machines[i] - target_dresses)\\n        \\n        return moves\\n"
         ],
         "test": {
             "input": [],
@@ -436,7 +436,7 @@
         "skeleton": "\\ndef findIntegers(self, n: int) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef findIntegers(self, n: int) -> int:\\n        f = [1,2]\\n        for i in range(2,30):\\n            f.append(f[-1] + f[-2])\\n        \\n        ans = last_seen = 0\\n\\n        for i in range(29,-1,-1):\\n            if (1 << i) & n:\\n                ans += f[i]\\n                if last_seen :\\n                    return ans\\n                last_seen = 1\\n            else:\\n                last_seen = 0\\n        return ans + 1\\n"
         ],
         "test": {
             "input": [],
@@ -448,7 +448,7 @@
         "skeleton": "\\ndef scheduleCourse(self, courses: List[List[int]]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef scheduleCourse(self, courses: List[List[int]]) -> int:\\n        courses.sort(key=lambda c: c[1])\\n        A, curr = [], 0\\n        for dur, ld in courses:\\n            heapq.heappush(A,-dur)\\n            curr += dur\\n            if curr > ld: curr += heapq.heappop(A)\\n        return len(A)\\n"
         ],
         "test": {
             "input": [],
@@ -460,7 +460,7 @@
         "skeleton": "\\ndef strangePrinter(self, s: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\n    def strangePrinter(self, s: str) -> int:\\n        n = len(s)\\n        dp = [[-1] * n for _ in range(n)]\\n        return self.Util(0, n - 1, s, dp)\\n\\n    def Util(self, i: int, j: int, s: str, dp: list) -> int:\\n        if i > j:\\n            return 0\\n\\n        if dp[i][j] != -1:\\n            return dp[i][j]\\n\\n        first_letter = s[i]\\n        # If the current character is not repeated in the rest of the string\\n        answer = 1 + self.Util(i + 1, j, s, dp)\\n        for k in range(i + 1, j + 1):\\n            # If repeated then update the answer\\n            if s[k] == first_letter:\\n                # Splitting from i -> k - 1 (remove the last character)\\n                # and from k + 1 -> j             \\n                better_answer = self.Util(i, k - 1, s, dp) + self.Util(k + 1, j, s, dp)\\n                answer = min(answer, better_answer)\\n        dp[i][j] = answer\\n        return answer\\n"
         ],
         "test": {
             "input": [],
@@ -472,7 +472,7 @@
         "skeleton": "\\ndef evaluate(self, expression: str) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef evaluate(self, expression: str) -> int:\\n\\n        def parse(e: str) -> list[str]:\\n            tokens, s, parenthesis = [], '', 0\\n\\n            for c in e:\\n                if c == '(':\\n                    parenthesis += 1\\n                elif c == ')':\\n                    parenthesis -= 1\\n                    \\n                if parenthesis == 0 and c == ' ':\\n                    tokens.append(s)\\n                    s = ''\\n                else:\\n                    s += c\\n\\n            if s: \\n                tokens.append(s)\\n            \\n            return tokens\\n\\n        def evaluate_expression(e: str, prevScope: dict) -> int:\\n            if e[0].isdigit() or e[0] == '-':\\n                return int(e)\\n            if e in prevScope:\\n                return prevScope[e]\\n\\n            scope = prevScope.copy()\\n            nextExpression = e[e.index(' ') + 1:-1]\\n            tokens = parse(nextExpression)\\n\\n            if e[1] == 'a':\\n                return evaluate_expression(tokens[0], scope) + evaluate_expression(tokens[1], scope)\\n            if e[1] == 'm':\\n                return evaluate_expression(tokens[0], scope) * evaluate_expression(tokens[1], scope)\\n\\n            for i in range(0, len(tokens) - 2, 2):\\n                scope[tokens[i]] = evaluate_expression(tokens[i + 1], scope)\\n\\n            return evaluate_expression(tokens[-1], scope)\\n\\n        return evaluate_expression(expression, {})\\n"
         ],
         "test": {
             "input": [],
@@ -484,7 +484,7 @@
         "skeleton": "\\ndef crackSafe(self, n: int, k: int) -> str:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\n    def crackSafe(self, n: int, k: int) -> str:\\n        if n == 1:\\n            return ''.join(map(str, range(k)))\\n        \\n        seen = set()\\n        result = []\\n        \\n        start_node = \\\"0\\\" * (n - 1)\\n        self.dfs(start_node, k, seen, result)\\n        \\n        return \\\"\\\".join(result) + start_node\\n\\n    def dfs(self, node, k, seen, result):\\n        for i in range(k):\\n            edge = node + str(i)\\n\\n            if edge not in seen:\\n                seen.add(edge)\\n\\n                self.dfs(edge[1:], k, seen, result)\\n                result.append(str(i))\\n"
         ],
         "test": {
             "input": [],
@@ -496,7 +496,7 @@
         "skeleton": "\\ndef slidingPuzzle(self, board: List[List[int]]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef slidingPuzzle(self, board: List[List[int]]) -> int:\\n\\n        state = (*board[0], *board[1])\\n        queue, seen, cnt = deque([state]), set(), 0\\n\\n        while queue:\\n\\n            for _ in range(len(queue)):\\n                state = list(queue.popleft())\\n                idx = state.index(0)\\n                if state == [1,2,3,4,5,0]: return cnt\\n\\n                for i in moves[idx]:\\n                    curr = state[:]\\n                    curr[idx], curr[i] = curr[i], 0\\n                    curr = tuple(curr)\\n                    if curr in seen: continue\\n                    queue.append(curr)\\n                    seen.add(curr)\\n\\n            cnt+= 1\\n\\n        return -1\\n"
         ],
         "test": {
             "input": [],
@@ -508,7 +508,7 @@
         "skeleton": "\\ndef hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:\\n        rows, cols = len(grid), len(grid[0])\\n        def neighbours(r, c):\\n            for new_r, new_c in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]:\\n                if not (0 <= new_r < rows and 0 <= new_c < cols): continue\\n                yield new_r, new_c\\n\\n        def make_stable(to_do):\\n            changed = 0\\n            for r, c in to_do:\\n                grid[r][c] = 2\\n            while to_do:\\n                r, c = to_do.pop()\\n                for new_r, new_c in neighbours(r, c):\\n                    if grid[new_r][new_c] == 1:\\n                        changed += 1\\n                        grid[new_r][new_c] = 2\\n                        to_do.append((new_r, new_c))\\n            return changed\\n        \\n        def can_be_stable(r, c):\\n            if r == 0: return True\\n            for new_r, new_c in neighbours(r, c):\\n                if grid[new_r][new_c] == 2:\\n                    return True\\n            return False\\n\\n\\n        for r, c in hits:\\n            grid[r][c] = -grid[r][c]\\n        \\n        stable = [(0, c) for c in range(cols) if grid[0][c] == 1]\\n        make_stable(stable)\\n        result = [0 for _ in range(len(hits))]\\n        for p, (r, c) in enumerate(reversed(hits), start = 1):\\n            if grid[r][c] == 0: continue\\n            if not can_be_stable(r, c):\\n                grid[r][c] = 1 \\n                continue \\n            changed = make_stable([(r, c)])\\n            result[-p] = changed\\n\\n        return result\\n"
         ],
         "test": {
             "input": [],
@@ -520,7 +520,7 @@
         "skeleton": "\\ndef racecar(self, target: int) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef racecar(self, target: int) -> int:\\n        queue = deque([(0,0,1)])\\n        visited = set()\\n        while queue:\\n            moves, position,speed = queue.popleft()\\n            if position == target:\\n                return moves\\n            if (position,speed) in visited:\\n                continue\\n            else:\\n                visited.add((position,speed))\\n                queue.append((moves+1,position+speed,speed*2))\\n                if (position+speed > target and speed > 0) or (position+speed < target and speed < 0):\\n                    speed = -1 if speed > 0 else 1\\n                    queue.append((moves+1,position,speed))\\n        return 0\\n"
         ],
         "test": {
             "input": [],
@@ -532,7 +532,7 @@
         "skeleton": "\\ndef mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:\\n        # 9:37\\n        total_wage, total_quality, max_heap = float('inf'), 0, []\\n        for ratio, q in sorted([(w/q, q) for w, q in zip(wage, quality)]):\\n            total_quality += q\\n            heappush(max_heap, -q)\\n            if len(max_heap) == k:\\n                total_wage = min(total_wage, total_quality * ratio)\\n                total_quality += heappop(max_heap)\\n        return total_wage\\n"
         ],
         "test": {
             "input": [],
@@ -544,7 +544,7 @@
         "skeleton": "\\ndef nthMagicalNumber(self, n: int, a: int, b: int) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef nthMagicalNumber(self, n: int, a: int, b: int) -> int:\\n        def GCD(a: int, b: int) -> int:\\n            x, y = a, b\\n            while y:\\n                x, y = y, x % y\\n            return x\\n                \\n        def LCM(a: int, b: int) -> int:\\n            return a * b / GCD(a, b)\\n\\n        lcm = LCM(a, b)\\n        low, high = 2, 10 ** 14\\n        while low < high:\\n            mid = (low + high) // 2\\n            if mid // a + mid // b - mid // lcm < n:\\n                low = mid + 1\\n            else:\\n                high = mid\\n        \\n        return low % (10 ** 9 + 7)\\n"
         ],
         "test": {
             "input": [],
@@ -556,7 +556,7 @@
         "skeleton": "\\ndef orderlyQueue(self, s: str, k: int) -> str:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef orderlyQueue(self, s: str, k: int) -> str:\\n        if k > 1: return ''.join(sorted(s))\\n        m = s\\n        for i in range(1, len(s)):\\n            # print(s[i: ]+s[: i])\\n            m = min(m, s[i: ]+s[: i])\\n        return m\\n"
         ],
         "test": {
             "input": [],
@@ -568,7 +568,7 @@
         "skeleton": "\\ndef movesToStamp(self, stamp: str, target: str) -> List[int]:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef movesToStamp(self, stamp: str, target: str) -> List[int]:\\n        m, n = len(stamp), len(target)\\n        stamp = list(stamp)\\n        target = list(target)\\n        \\n        # Helper function to check if we can stamp at position i\\n        def can_stamp(i):\\n            for j in range(m):\\n                if target[i + j] != '?' and target[i + j] != stamp[j]:\\n                    return False\\n            return True\\n        \\n        # Helper function to apply stamp at position i\\n        def apply_stamp(i):\\n            for j in range(m):\\n                target[i + j] = '?'\\n        \\n        # Track visited positions and the stamping process\\n        stamped = [False] * n\\n        result = []\\n        queue = deque()\\n        \\n        # Initial queue fill\\n        for i in range(n - m + 1):\\n            if can_stamp(i):\\n                queue.append(i)\\n                apply_stamp(i)\\n                result.append(i)\\n                stamped[i] = True\\n        \\n        # Process the queue\\n        while queue:\\n            pos = queue.popleft()\\n            for i in range(max(0, pos - m + 1), min(n - m + 1, pos + m)):\\n                if can_stamp(i):\\n                    if not stamped[i]:\\n                        queue.append(i)\\n                        apply_stamp(i)\\n                        result.append(i)\\n                        stamped[i] = True\\n        \\n        # Verify that all characters in target are stamped\\n        if all(c == '?' for c in target):\\n            return result[::-1]\\n        else:\\n            return []\\n"
         ],
         "test": {
             "input": [],
@@ -580,7 +580,7 @@
         "skeleton": "\\ndef oddEvenJumps(self, arr: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef oddEvenJumps(self, arr: List[int]) -> int:\\n        n = len(arr)\\n        \\n        O, E = 0, 1\\n\\n        dp = [[False for _ in range(n)], [False for _ in range(n)]]\\n        dp[O][-1], dp[E][-1] = True, True\\n\\n        index_map = {arr[-1]: n-1}\\n        sorted_list = [arr[-1]]\\n        for i, x in list(enumerate(arr[:-1]))[::-1]:\\n            index = bisect.bisect_left(sorted_list, x)\\n\\n            if index != len(sorted_list) and sorted_list[index] == x:\\n                dp[O][i] = dp[E][index_map[sorted_list[index]]]\\n                dp[E][i] = dp[O][index_map[sorted_list[index]]]\\n            else:\\n                if index != len(sorted_list):\\n                    dp[O][i] = dp[E][index_map[sorted_list[index]]]\\n                if index != 0:\\n                    dp[E][i] = dp[O][index_map[sorted_list[index-1]]]\\n            sorted_list.insert(index, x)\\n            index_map[x] = i\\n        return sum(dp[O])\\n"
         ],
         "test": {
             "input": [],
@@ -592,7 +592,7 @@
         "skeleton": "\\ndef maxSizeSlices(self, slices: List[int]) -> int:\\n",
         "examples": [],
         "ref": [
-            "\\n\\n"
+            "\\ndef maxSizeSlices(self, slices: List[int]) -> int:\\n        n = len(slices)  \\n        m = n // 3  \\n\\n        def dp(slices_subset):\\n            k = len(slices_subset)\\n            dp_table = [[0] * (m + 1) for _ in range(k + 1)]\\n            for i in range(1, k + 1):\\n                for j in range(1, min(i, m) + 1):\\n                    dp_table[i][j] = max(dp_table[i - 1][j], dp_table[i - 2][j - 1] + slices_subset[i - 1])\\n            return dp_table[k][m]\\n\\n        return max(dp(slices[:-1]), dp(slices[1:]))\\n"
         ],
         "test": {
             "input": [],
