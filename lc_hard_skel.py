@@ -118,103 +118,103 @@ def removeInvalidParentheses(self, s: str) -> List[str]:
 """
 
 lc26 = """
-
+def maxCoins(self, nums: List[int]) -> int:
 """
 
 lc27 = """
-
+def countSmaller(self, nums: List[int]) -> List
 """
 
 lc28 = """
-
+def maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:
 """
 
 lc29 = """
-
+def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
 """
 
 lc30 = """
-
+def minPatches(self, nums: List[int], n: int) -> int:
 """
 
 lc31 = """
-
+def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
 """
 
 lc32 = """
-
+def canCross(self, stones: List[int]) -> bool:
 """
 
 lc33 = """
-
+def strongPasswordChecker(self, password: str) -> int:
 """
 
 lc34 = """
-
+def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
 """
 
 lc35 = """
-
+def findRotateSteps(self, ring: str, key: str) -> int:
 """
 
 lc36 = """
-
+def findMinMoves(self, machines: List[int]) -> int:
 """
 
 lc37 = """
-
+def findIntegers(self, n: int) -> int:
 """
 
 lc38 = """
-
+def scheduleCourse(self, courses: List[List[int]]) -> int:
 """
 
 lc39 = """
-
+def strangePrinter(self, s: str) -> int:
 """
 
 lc40 = """
-
+def evaluate(self, expression: str) -> int:
 """
 
 lc41 = """
-
+def crackSafe(self, n: int, k: int) -> str:
 """
 
 lc42 = """
-
+def slidingPuzzle(self, board: List[List[int]]) -> int:
 """
 
 lc43 = """
-
+def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
 """
 
 lc44 = """
-
+def racecar(self, target: int) -> int:
 """
 
 lc45 = """
-
+def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
 """
 
 lc46 = """
-
+def nthMagicalNumber(self, n: int, a: int, b: int) -> int:
 """
 
 lc47 = """
-
+def orderlyQueue(self, s: str, k: int) -> str:
 """
 
 lc48 = """
-
+def movesToStamp(self, stamp: str, target: str) -> List[int]:
 """
 
 lc49 = """
-
+def oddEvenJumps(self, arr: List[int]) -> int:
 """
 
 lc50 = """
-
+def maxSizeSlices(self, slices: List[int]) -> int:
 """
 
 lc_skel = [globals()[f"lc{i}"] for i in range(1, 51)]
