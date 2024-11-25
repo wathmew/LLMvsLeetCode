@@ -1,23 +1,28 @@
 import json
 
 lc1 = """
-def trap(self, height: List[int]) -> int:
+class Solution:
+    def trap(self, height: List[int]) -> int:
 """
 
 lc2 = """
-def largestRectangleArea(self, heights: List[int]) -> int:
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
 """
 
 lc3 = """
-def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
 """
 
 lc4 = """
-def minWindow(self, s: str, t: str) -> str:
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
 """
 
 lc5 = """
-def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
 """
 
 lc6 = """
@@ -26,7 +31,8 @@ lc6 = """
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
 """
 
 lc7 = """
@@ -35,7 +41,8 @@ lc7 = """
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
 """
 
 lc8 = """
@@ -45,176 +52,219 @@ lc8 = """
 #         self.val = val
 #         self.left = left
 #         self.right = right
-def maxPathSum(self, root: Optional[TreeNode]) -> int:
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
 """
 
 lc9 = """
-def reversePairs(self, nums: List[int]) -> int:
+class Solution:
+    def reversePairs(self, nums: List[int]) -> int:
 """
 
 lc10 = """
-def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
 """
 
 lc11 = """
-def solveNQueens(self, n: int) -> List[List[str]]:
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
 """
 
 lc12 = """
-def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
+class Solution:
+    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
 """
 
 lc13 = """
-def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
 """
 
 lc14 = """
-def minInterval(self, intervals: List[List[int]], queries: List[int]) -> List[int]:
+class Solution:
+    def minInterval(self, intervals: List[List[int]], queries: List[int]) -> List[int]:
 """
 
 lc15 = """
-def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
 """
 
 lc16 = """
-def swimInWater(self, grid: List[List[int]]) -> int:
+class Solution:
+    def swimInWater(self, grid: List[List[int]]) -> int:
 """
 
 lc17 = """
-def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
 """
 
 lc18 = """
-def numDistinct(self, s: str, t: str) -> int:
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
 """
 
 lc19 = """
-def maxCoins(self, nums: List[int]) -> int:
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
 """
 
 lc20 = """
-def isMatch(self, s: str, p: str) -> bool:
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
 """
 
 lc21 = """
-def solveSudoku(self, board: List[List[str]]) -> None:
-    #Do not return anything, modify board in-place instead.
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        #Do not return anything, modify board in-place instead.
 """
 
 lc22 = """
-def minCut(self, s: str) -> int:
+class Solution:
+    def minCut(self, s: str) -> int:
 """
 
 lc23 = """
-def maxProfit(self, k: int, prices: List[int]) -> int:
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
 """
 
 lc24 = """
-def calculate(self, s: str) -> int:
+class Solution:
+    def calculate(self, s: str) -> int:
 """
 
 lc25 = """
-def removeInvalidParentheses(self, s: str) -> List[str]:
+class Solution:
+    def removeInvalidParentheses(self, s: str) -> List[str]:
 """
 
 lc26 = """
-def maxCoins(self, nums: List[int]) -> int:
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
 """
 
 lc27 = """
-def countSmaller(self, nums: List[int]) -> List
+class Solution:
+    def countSmaller(self, nums: List[int]) -> List
 """
 
 lc28 = """
-def maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:
+class Solution:
+    def maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:
 """
 
 lc29 = """
-def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
+class Solution:
+    def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
 """
 
 lc30 = """
-def minPatches(self, nums: List[int], n: int) -> int:
+class Solution:
+    def minPatches(self, nums: List[int], n: int) -> int:
 """
 
 lc31 = """
-def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+class Solution:
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
 """
 
 lc32 = """
-def canCross(self, stones: List[int]) -> bool:
+class Solution:
+    def canCross(self, stones: List[int]) -> bool:
 """
 
 lc33 = """
-def strongPasswordChecker(self, password: str) -> int:
+class Solution:
+    def strongPasswordChecker(self, password: str) -> int:
 """
 
 lc34 = """
-def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
+class Solution:
+    def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
 """
 
 lc35 = """
-def findRotateSteps(self, ring: str, key: str) -> int:
+class Solution:
+    def findRotateSteps(self, ring: str, key: str) -> int:
 """
 
 lc36 = """
-def findMinMoves(self, machines: List[int]) -> int:
+class Solution:
+    def findMinMoves(self, machines: List[int]) -> int:
 """
 
 lc37 = """
-def findIntegers(self, n: int) -> int:
+class Solution:
+    def findIntegers(self, n: int) -> int:
 """
 
 lc38 = """
-def scheduleCourse(self, courses: List[List[int]]) -> int:
+class Solution:
+    def scheduleCourse(self, courses: List[List[int]]) -> int:
 """
 
 lc39 = """
-def strangePrinter(self, s: str) -> int:
+class Solution:
+    def strangePrinter(self, s: str) -> int:
 """
 
 lc40 = """
-def evaluate(self, expression: str) -> int:
+class Solution:
+    def evaluate(self, expression: str) -> int:
 """
 
 lc41 = """
-def crackSafe(self, n: int, k: int) -> str:
+class Solution:
+    def crackSafe(self, n: int, k: int) -> str:
 """
 
 lc42 = """
-def slidingPuzzle(self, board: List[List[int]]) -> int:
+class Solution:
+    def slidingPuzzle(self, board: List[List[int]]) -> int:
 """
 
 lc43 = """
-def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
+class Solution:
+    def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
 """
 
 lc44 = """
-def racecar(self, target: int) -> int:
+class Solution:
+    def racecar(self, target: int) -> int:
 """
 
 lc45 = """
-def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
+class Solution:
+    def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
 """
 
 lc46 = """
-def nthMagicalNumber(self, n: int, a: int, b: int) -> int:
+class Solution:
+    def nthMagicalNumber(self, n: int, a: int, b: int) -> int:
 """
 
 lc47 = """
-def orderlyQueue(self, s: str, k: int) -> str:
+class Solution:
+    def orderlyQueue(self, s: str, k: int) -> str:
 """
 
 lc48 = """
-def movesToStamp(self, stamp: str, target: str) -> List[int]:
+class Solution:
+    def movesToStamp(self, stamp: str, target: str) -> List[int]:
 """
 
 lc49 = """
-def oddEvenJumps(self, arr: List[int]) -> int:
+class Solution:
+    def oddEvenJumps(self, arr: List[int]) -> int:
 """
 
 lc50 = """
-def maxSizeSlices(self, slices: List[int]) -> int:
+class Solution:
+    def maxSizeSlices(self, slices: List[int]) -> int:
 """
 
 lc_skel = [globals()[f"lc{i}"] for i in range(1, 51)]
