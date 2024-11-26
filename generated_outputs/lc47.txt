@@ -1,0 +1,7 @@
+def orderlyQueue(self, s: str, k: int) -> str:
+    if k > 1:  # Check if k is greater than 1
+        return ''.join(sorted(s))  # Return the lexicographically sorted string
+    m = s  # Initialize the string to be modified
+    for i in range(1, len(s)):  # Iterate over the string from the second character to the end
+        m = min(m, s[i:] + s[:i])  # Update the string to be modified by appending the current character
+    return m

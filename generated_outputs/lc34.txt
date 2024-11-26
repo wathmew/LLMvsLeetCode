@@ -1,0 +1,29 @@
+import heapq
+
+class Solution:
+    def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
+        # Create a min heap to store the projects with their profits
+        min_capital = [(c, p) for c, p in zip(capital, profits)]
+        heapq.heapify(min_capital)
+
+        # Initialize the result list
+        max_profit = []
+
+        # Iterate through the projects
+        for i in range(k):
+            # While the heap is not empty and the current project's capital is less than or equal to the available capital
+            while min_capital and min_capital[0][0] <= w:
+                # Pop the project with the highest profit from the heap
+                c, p = heapq.heappop(min_capital)
+                # Push the negative of the project's profit back into the heap
+                heapq.heappush(max_profit, -1 * p)
+
+            # If the heap is empty, break the loop
+            if not max_profit:
+                break
+
+            # Update the available capital
+            w += -1 * heapq.heappop(max_profit)
+
+        # Return the final available capital
+        return w

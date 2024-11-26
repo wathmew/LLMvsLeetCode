@@ -1,0 +1,29 @@
+def solveNQueens(n):
+    def backtrack(r, board, placedCol, placedPos, placedNeg):
+        if r == n:
+            result.append("".join(board))
+            return
+        for c in range(n):
+            if c in placedCol or r + c in placedPos or r - c in placedNeg:
+                continue
+            board[r][c] = "Q"
+            placedCol.add(c)
+            placedPos.add(r + c)
+            placedNeg.add(r - c)
+            backtrack(r + 1, board, placedCol, placedPos, placedNeg)
+            board[r][c] = "."
+            placedCol.remove(c)
+            placedPos.remove(r + c)
+            placedNeg.remove(r - c)
+
+    board = [["." for _ in range(n)] for _ in range(n)]
+    placedCol = set()
+    placedPos = set()
+    placedNeg = set()
+    result = []
+    backtrack(0, board, placedCol, placedPos, placedNeg)
+    return result
+
+# Example usage:
+n = 4
+print(solveNQueens(n))

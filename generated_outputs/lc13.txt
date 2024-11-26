@@ -1,0 +1,30 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        q = deque([(beginWord, 1)])
+        hmap = {}
+        
+        for word in wordList:
+            hmap[word] = 1
+        
+        while len(q) > 0:
+            word = q.popleft()
+            wordl = list(word[0])
+            
+            if word[1] > 1 and word[0] == endWord:
+                return word[1]
+            
+            for i in range(len(wordl)):
+                t = wordl[i]
+                for j in range(ord('a'), ord('z') + 1):
+                    wordl[i] = chr(ord('a') + j)
+                    tword = ''.join(wordl)
+                    
+                    if hmap[tword] == 1 and tword!= word[0]:
+                        q.append((tword, word[1] + 1))
+                        hmap[tword] = 0
+            q.append(word)
+        
+        return 0

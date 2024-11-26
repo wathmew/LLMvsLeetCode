@@ -1,0 +1,45 @@
+class Solution:
+    def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
+        rows, cols = len(grid), len(grid[0])
+        def neighbours(r, c):
+            for new_r, new_c in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]:
+                if not (0 <= new_r < rows and 0 <= new_c < cols):
+                    continue
+                yield new_r, new_c
+
+        def make_stable(to_do):
+            changed = 0
+            for r, c in to_do:
+                grid[r][c] = 2
+            while to_do:
+                r, c = to_do.pop()
+                for new_r, new_c in neighbours(r, c):
+                    if grid[new_r][new_c] == 1:
+                        changed += 1
+                        grid[new_r][new_c] = 2
+                        to_do.append((new_r, new_c))
+            return changed
+
+        def can_be_stable(r, c):
+            if r == 0:
+                return True
+            for new_r, new_c in neighbours(r, c):
+                if grid[new_r][new_c] == 2:
+                    return True
+            return False
+
+        for r, c in hits:
+            grid[r][c] = -grid[r][c]
+        stable = [(0, c) for c in range(cols) if grid[0][c] == 1]
+        make_stable(stable)
+        result = [0 for _ in range(len(hits))]
+        for p, (r, c) in enumerate(reversed(hits), start=1):
+            if grid[r][c] == 0:
+                continue
+            if not can_be_stable(r, c):
+                grid[r][c] = 1
+                continue
+            changed = make_stable([(r, c)])
+            result[-p] = changed
+
+        return result

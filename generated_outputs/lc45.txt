@@ -1,0 +1,21 @@
+import heapq
+
+class Solution:
+    def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
+        # Initialize the total wage and total quality
+        total_wage = 0
+        total_quality = 0
+        max_heap = []
+
+        # Iterate over the quality and wage arrays
+        for ratio, q in sorted([(w/q, q) for w, q in zip(wage, quality)]):
+            # Push the quality and wage into the max heap
+            heapq.heappush(max_heap, -q)
+            # If the max heap has more than k elements, pop the smallest element
+            if len(max_heap) > k:
+                total_wage += -heapq.heappop(max_heap)
+            # Update the total quality
+            total_quality += q
+
+        # Return the total wage
+        return total_wage

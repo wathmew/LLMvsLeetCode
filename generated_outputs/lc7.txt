@@ -1,0 +1,28 @@
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head:  # Base case: if the list is empty, return None
+            return None
+        
+        if k == 1:  # Base case: if the number of nodes is 1, return the list
+            return head
+        
+        end_check = head  # Initialize the end pointer
+        for _ in range(k - 1):  # Iterate k-1 times
+            if not end_check.next:  # If the end pointer reaches the end of the list
+                return head  # Return the original list
+            end_check = end_check.next  # Move the end pointer to the next node
+        
+        blank = ListNode(0)  # Create a dummy node to simplify the code
+        p0, p1, count = blank, head, 0  # Initialize the pointers
+        
+        while count < k:  # Iterate k times
+            curr = p1  # Move the current pointer to the next node
+            p2 = curr.next  # Move the next pointer to the next node
+            curr.next = p0  # Reverse the link of the current node
+            p0 = p1  # Move the previous pointer to the current node
+            p1 = p2  # Move the next pointer to the next node
+            count += 1  # Increment the count
+        
+        head.next = self.reverseKGroup(p2, k)  # Reverse the rest of the list
+        head = p0  # Update the head of the modified list
+        return head
