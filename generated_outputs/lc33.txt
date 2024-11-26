@@ -36,4 +36,4 @@ class Solution:
             long_repeats = [length for _, length in long_repeats]
 
         # Calculate the minimum number of steps required
-        return max(len(password) - 20 + max(0, len(long_repeats) // 3) + max(0, len(password) - 20))
+        return max(len(password) - 20, sum(length // 3 for length in long_repeats) + max(0, len(password) - 20))

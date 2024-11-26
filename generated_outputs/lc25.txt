@@ -32,9 +32,11 @@ class Solution:
 
             for i in range(len(current)):
                 if current[i] not in '()':
-                    next_str = current[:i] + current[i+1:]
-                    if next_str not in visited:
-                        visited.add(next_str)
-                        queue.append((next_str, removals + 1))
+                    continue
+
+                next_str = current[:i] + current[i+1:]
+                if next_str not in visited:
+                    visited.add(next_str)
+                    queue.append((next_str, removals + 1))
 
         return result

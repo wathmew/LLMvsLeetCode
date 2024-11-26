@@ -1,12 +1,12 @@
-def countRangeSum(nums, lower, upper):
+def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
     prefix = [0] * len(nums)
     for i in range(1, len(nums)):
         prefix[i] = prefix[i-1] + nums[i]
 
-    count = 0
+    self.count = 0
     for n in prefix:
         if lower <= n <= upper:
-            count += 1
+            self.count += 1
 
     def merge(left_arr, right_arr):
         start, end = 0, 0
@@ -15,8 +15,18 @@ def countRangeSum(nums, lower, upper):
                 start += 1
             while end < len(right_arr) and right_arr[end] - left_arr[i] <= upper:
                 end += 1
-            count += end - start
-        return sorted(left_arr[start:end+1]) + left_arr[i+1:] + right_arr[end+1:]
+            self.count += end - start
+
+        l, r = 0, 0
+        sorted_arr = []
+        while l < len(left_arr) and r < len(right_arr):
+            if left_arr[l] < right_arr[r]:
+                sorted_arr.append(left_arr[l])
+                l += 1
+            else:
+                sorted_arr.append(right_arr[r])
+                r += 1
+        return sorted_arr + left_arr[l:] + right_arr[r:]
 
     def divide(arr):
         if len(arr) <= 1:
@@ -26,10 +36,4 @@ def countRangeSum(nums, lower, upper):
         right_arr = divide(arr[mid:])
         return merge(left_arr, right_arr)
 
-    return divide(prefix)
-
-# Test the function
-nums = [1, 2, 3, 4, 5]
-lower = 3
-upper = 6
-print(countRangeSum(nums, lower, upper))
+    return self.count

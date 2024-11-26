@@ -4,26 +4,22 @@ class Solution:
         dummy = ListNode(0)
         current = dummy
         
-        # Iterate through the linked lists
-        for i in range(len(lists)):
-            # If the list is not empty, append its head to the result
-            if lists[i]:
-                current.next = lists[i]
+        # Iterate through each list and append its nodes to the main list
+        for node in lists:
+            if node:
+                current.next = node
                 current = current.next
-            # If the list is empty, skip it
             else:
-                continue
+                break
         
-        # Initialize the current node to the dummy node
-        current = dummy
-        # Iterate through the linked lists
+        # Merge the sorted lists
+        current = dummy.next
         while current.next:
-            # Move to the next node
+            min_val = current.val
+            min_index = current.index(min_val)
+            current.val = min_val
             current = current.next
-            # Move to the next node in the result
-            current.next = lists[current.next]
-            # Move to the next node in the result
-            current = current.next
+            for i in range(min_index):
+                current = current.next
         
-        # Return the head of the merged linked list
         return dummy.next

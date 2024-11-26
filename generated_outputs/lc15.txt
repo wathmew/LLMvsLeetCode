@@ -5,15 +5,15 @@ class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         flight_map = defaultdict(list)
         result = []
-
+        
         # Populate the flight map with each departure and arrival
         for departure, arrival in tickets:
             flight_map[departure].append(arrival)
-
+        
         # Sort each list of destinations in reverse lexicographical order
         for departure in flight_map:
             flight_map[departure].sort(reverse=True)
-
+        
         # Perform DFS traversal
         def dfsTraversal(current):
             destinations = flight_map[current]
@@ -21,7 +21,6 @@ class Solution:
                 next_destination = destinations.pop(0)
                 dfsTraversal(next_destination)
             result.append(current)
-
+        
         dfsTraversal("JFK")
-
         return result[::-1]

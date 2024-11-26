@@ -1,21 +1,15 @@
-def find(self, i, job, startTime, n, dp):
-    if i >= n:
-        return 0
-    if dp[i]!= -1:
-        return dp[i]
-    
-    index = startTime.index(job[i][1]
-    
-    pick = job[i][2] + self.find(index, job, startTime, n, dp)
-    notpick = self.find(i + 1, job, startTime, n, dp)
-    
-    dp[i] = max(pick, notpick)
-    return dp[i]
+class Solution:
+    def jobScheduling(self, startTime, endTime, profit):
+        n = len(startTime)
+        job = [[startTime[i], endTime[i], profit[i]] for i in range(n)]
+        job.sort(key=lambda x: x[1])
+        dp = [-1] * n
+        dp[0] = 0
 
-def jobScheduling(self, startTime, endTime, profit):
-    n = len(startTime)
-    job = [[startTime[i], endTime[i], profit[i]] for i in range(n)]
-    job.sort(key=lambda x: x[1])
-    startTime.sort()
-    
-    return self.find(0, job, startTime, n, [-1]*n)
+        for i in range(1, n):
+            for j in range(i):
+                if job[i][0] >= job[j][1]:
+                    dp[i] = max(dp[i], dp[j] + job[i][2])
+            dp[i] = max(dp[i], dp[i-1])
+
+        return dp[-1]

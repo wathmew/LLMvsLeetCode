@@ -9,7 +9,7 @@ class Solution:
         # Initialize the result list
         max_profit = []
 
-        # Iterate through the projects
+        # Iterate through the k projects
         for i in range(k):
             # While the heap is not empty and the current project's capital is less than or equal to the available capital
             while min_capital and min_capital[0][0] <= w:
@@ -22,8 +22,8 @@ class Solution:
             if not max_profit:
                 break
 
-            # Update the available capital
+            # Add the available capital to the project with the highest profit to the result list
             w += -1 * heapq.heappop(max_profit)
 
-        # Return the final available capital
+        # Return the total capital
         return w
