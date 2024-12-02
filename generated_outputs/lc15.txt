@@ -1,26 +1,25 @@
-from collections import defaultdict
-from typing import List
-
 class Solution:
-    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        flight_map = defaultdict(list)
+    def findItinerary(self, tickets: list[list[str]]) -> list[str]:
+        flight_map = {}
         result = []
-        
+
         # Populate the flight map with each departure and arrival
         for departure, arrival in tickets:
+            if departure not in flight_map:
+                flight_map[departure] = []
             flight_map[departure].append(arrival)
-        
+
         # Sort each list of destinations in reverse lexicographical order
         for departure in flight_map:
             flight_map[departure].sort(reverse=True)
-        
+
         # Perform DFS traversal
         def dfsTraversal(current):
             destinations = flight_map[current]
             while destinations:
-                next_destination = destinations.pop(0)
+                next_destination = destinations.pop(0)  # Changed from pop() to pop(0) to get the first element
                 dfsTraversal(next_destination)
             result.append(current)
-        
+
         dfsTraversal("JFK")
         return result[::-1]

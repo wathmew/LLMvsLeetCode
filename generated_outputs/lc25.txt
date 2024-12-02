@@ -1,12 +1,8 @@
 from collections import deque
 
 class Solution:
-    def removeInvalidParentheses(self, s: str) -> List[str]:
+    def removeInvalidParentheses(self, s: str) -> list[str]:
         def is_valid(s: str) -> bool:
-            """
-            Checks if a string is valid by counting the number of opening and closing parentheses.
-            Returns True if the string is valid, False otherwise.
-            """
             count = 0
             for char in s:
                 if char == '(':
@@ -33,7 +29,6 @@ class Solution:
             for i in range(len(current)):
                 if current[i] not in '()':
                     continue
-
                 next_str = current[:i] + current[i+1:]
                 if next_str not in visited:
                     visited.add(next_str)

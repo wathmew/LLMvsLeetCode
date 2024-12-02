@@ -1,55 +1,38 @@
-def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-    """
-    Given an m x n board of characters and a list of strings words, return all words on the board.
-    
-    Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring.
-    The same letter cell may not be used more than once in a word.
-    """
-    
-    def exist(word: str) -> bool:
-        """
-        Check if a word exists in the board.
-        
-        Args:
-        word (str): The word to check.
-        
-        Returns:
-        bool: True if the word exists, False otherwise.
-        """
-        if len(word) > len(board[0] * len(board):  # Check if word is too long
-            return False
-        def backtracking(i, j, word_idx: int) -> bool:
-            """
-            Recursively check if a word can be formed from the current position.
-            
-            Args:
-            i (int): The current row index.
-            j (int): The current column index.
-            word_idx (int): The current index in the word.
-            
-            Returns:
-            bool: True if a word can be formed, False otherwise.
-            """
-            if word_idx == len(word):  # If the word is complete, return True
-                return True
-            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]):  # If out of bounds
+class Solution:
+    def findWords(self, board: list[list[str]], words: list[str]) -> list[str]:
+        def exist(word: str) -> bool:
+            if len(word) > len(board[0]) * len(board):
                 return False
-            elif board[i][j]!= word[word_idx]:  # If the current character does not match
-                return False
-            buff, board[i][j] = board[i][j], '#'  # Mark the current cell as visited
-            res = (backtracking(i + 1, j, word_idx + 1) or  # Try moving up
-                   backtracking(i - 1, j, word_idx + 1) or  # Try moving left
-                   backtracking(i, j + 1, word_idx + 1) or  # Try moving down
-                   backtracking(i, j - 1, word_idx + 1))  # Try moving right
-            board[i][j] = buff  # Unmark the current cell
-            return res
-        for i in range(len(board)):  # Try all positions in the board
-            for j in range(len(board[i])):  # Try all characters in the word
-                if backtracking(i, j, 0):  # If a word can be formed
+
+            def backtracking(i, j, word_idx: int) -> bool:
+                if word_idx == len(word):
                     return True
-        return False
-    res = []  # Initialize the result list
-    for word in words:  # Try all words
-        if exist(word):  # If a word exists
-            res.append(word)  # Add the word to the result list
-    return res
+
+                if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]):
+                    return False  # went out of borders
+
+                elif board[i][j]!= word[word_idx]:
+                    return False  # current letter does not match
+
+                buff, board[i][j] = board[i][j], '#'
+                res = (
+                    backtracking(i + 1, j, word_idx + 1) or
+                    backtracking(i - 1, j, word_idx + 1) or
+                    backtracking(i, j + 1, word_idx + 1) or
+                    backtracking(i, j - 1, word_idx + 1)
+                )
+
+                board[i][j] = buff
+                return res
+
+            for i in range(len(board)):
+                for j in range(len(board[i])):
+                    if backtracking(i, j, 0):
+                        return True
+            return False
+
+            res = []
+            for word in words:
+                if exist(word):
+                    res.append(word)
+            return res

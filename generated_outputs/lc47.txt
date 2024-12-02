@@ -1,8 +1,8 @@
-def orderlyQueue(self, s: str, k: int) -> str:
-    if k > 1:  # If k is greater than 1, we can simply return the sorted string
-        return ''.join(sorted(s))
-    
-    m = s  # Initialize the result string
-    for i in range(1, len(s)):  # Iterate over the string from the second character to the end
-        m = min(m, s[i:] + s[:i])  # Update the result string by appending the first i characters of the string
-    return m
+class Solution:
+    def orderlyQueue(self, s: str, k: int) -> str:
+        if k > 1:
+            return ''.join(sorted(s))
+        m = s
+        for i in range(1, len(s)):
+            m = min(m, s[i:] + s[:i])
+        return m

@@ -8,21 +8,19 @@ class Solution:
         for c in s:
             if c.isdigit():
                 number = number * 10 + int(c)
-            elif c in ['+', '-']:
+            elif c in "+-":
                 result += number * sign_value
                 sign_value = -1 if c == '-' else 1
                 number = 0
-            elif c == '(':
+            elif c == "(":
                 operations_stack.append(result)
                 operations_stack.append(sign_value)
                 result = 0
                 sign_value = 1
-            elif c == ')':
+            elif c == ")":
                 result += sign_value * number
                 result *= operations_stack.pop()
                 result += operations_stack.pop()
                 number = 0
-            else:
-                raise ValueError("Invalid character in the input string")
 
         return result + number * sign_value

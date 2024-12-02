@@ -1,25 +1,24 @@
-def longestIncreasingPath(self, matrix: List[List[int]) -> int):
-    rows, cols = len(matrix), len(matrix[0])
-    nbr = [[0,1],[0,-1],[1,0],[-1,0]]
-    
-    def longest_path(r1, c1):
-        if (r1,c1) in dp:
+class Solution:
+    def longestIncreasingPath(self, matrix: list[list[int]]) -> int:
+        dp = {}
+        rows, cols = len(matrix), len(matrix[0])
+        nbr = [[0,1],[0,-1],[1,0],[-1,0]]
+
+        def longest_path(r1, c1):
+            if (r1,c1) in dp:
+                return dp[(r1,c1)]
+            max_path = 1
+            for [dr,dc] in nbr:
+                nr, nc = r1+dr, c1+dc
+                if nr>=0 and nr<rows and nc>=0 and nc<cols:
+                    if matrix[nr][nc] > matrix[r1][c1]:
+                        max_path = max(max_path, 1+longest_path(nr,nc))
+            dp[(r1,c1)] = max_path
             return dp[(r1,c1)]
-        
-        max_path = 1
-        for [dr,dc] in nbr:
-            nr, nc = r1+dr, c1+dc
-            if nr>=0 and nr<rows and nc>=0 and nc<cols:
-                if matrix[nr][nc] > matrix[r1][c1]:
-                    max_path = max(max_path, 1+longest_path(nr,nc))
-        
-        dp[(r1,c1)] = max_path
-        return dp[(r1,c1)]
-    
-    ans = 1
-    for r in range(rows):
-        for c in range(cols):
-            path_l = longest_path(r,c)
-            ans = max(ans, path_l)
-    
-    return ans
+
+        ans = 1
+        for r in range(rows):
+            for c in range(cols):
+                path_l = longest_path(r,c)
+                ans = max(ans, path_l)
+        return ans

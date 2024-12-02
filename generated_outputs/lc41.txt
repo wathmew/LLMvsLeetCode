@@ -5,7 +5,8 @@ class Solution:
         
         seen = set()
         result = []
-        start_node = "0" * (n - 1)
+        
+        start_node = '0' * (n - 1)
         self.dfs(start_node, k, seen, result)
         
         return ''.join(result) + start_node
@@ -13,7 +14,9 @@ class Solution:
     def dfs(self, node, k, seen, result):
         for i in range(k):
             edge = node + str(i)
+            
             if edge not in seen:
                 seen.add(edge)
+                
                 self.dfs(edge[1:], k, seen, result)
                 result.append(str(i))

@@ -1,11 +1,26 @@
-from collections import deque
-
 class Solution:
-    def scheduleCourse(self, courses: List[List[int]]) -> int:
+    def scheduleCourse(self, courses):
+        # Sort the courses by their last day
         courses.sort(key=lambda c: c[1])
-        A, curr = [], 0
+        
+        # Initialize a priority queue to store the durations of the courses
+        A = []
+        
+        # Initialize the current time
+        curr = 0
+        
+        # Iterate over the courses
         for dur, ld in courses:
+            # Push the duration of the current course into the priority queue
             heapq.heappush(A, -dur)
+            
+            # Add the duration of the current course to the current time
             curr += dur
-            if curr > ld: curr += heapq.heappop(A)
+            
+            # If the current time exceeds the last day of the current course, 
+            # pop the duration of the course with the earliest end time from the priority queue
+            while curr > ld:
+                curr += heapq.heappop(A)
+        
+        # Return the number of courses that can be taken
         return len(A)

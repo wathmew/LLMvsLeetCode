@@ -1,15 +1,17 @@
-import bisect
-
 class Solution:
-    def oddEvenJumps(self, arr: List[int]) -> int:
+    def oddEvenJumps(self, arr):
         n = len(arr)
         O, E = 0, 1
+
         dp = [[False for _ in range(n)], [False for _ in range(n)]]
+        dp[O][-1], dp[E][-1] = True, True
+
         index_map = {arr[-1]: n-1}
         sorted_list = [arr[-1]]
 
-        for i, x in enumerate(arr[:-1]):
+        for i, x in list(enumerate(arr[:-1])[::-1]):
             index = bisect.bisect_left(sorted_list, x)
+
             if index!= len(sorted_list) and sorted_list[index] == x:
                 dp[O][i] = dp[E][index_map[sorted_list[index]]]
                 dp[E][i] = dp[O][index_map[sorted_list[index]]]
@@ -18,6 +20,7 @@ class Solution:
                     dp[O][i] = dp[E][index_map[sorted_list[index]]]
                 if index!= 0:
                     dp[E][i] = dp[O][index_map[sorted_list[index-1]]]
+
             sorted_list.insert(index, x)
             index_map[x] = i
 

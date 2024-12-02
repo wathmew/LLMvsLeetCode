@@ -1,5 +1,5 @@
 class Solution:
-    def findMinMoves(self, machines: List[int]) -> int:
+    def findMinMoves(self, machines):
         n = len(machines)
         total_dresses = sum(machines)
         

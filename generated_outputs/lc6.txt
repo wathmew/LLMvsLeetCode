@@ -1,25 +1,39 @@
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
-    def mergeKLists(self, lists: List[ListNode]) -> Optional[ListNode]:
-        # Create a dummy node to simplify the code
-        dummy = ListNode(0)
-        current = dummy
+    def mergeKLists(self, lists):
+        # Initialize an empty list to store the values from all linked lists
+        merged_list = []
         
-        # Iterate through each list and append its nodes to the main list
-        for node in lists:
-            if node:
-                current.next = node
-                current = current.next
+        # Iterate over each linked list
+        for i in range(len(lists)):
+            # Initialize a temporary pointer to the head of the current linked list
+            temp = lists[i]
+            
+            # Traverse the linked list and append its values to the merged list
+            while temp:
+                merged_list.append(temp.val)
+                temp = temp.next
+        
+        # Sort the merged list
+        merged_list.sort()
+        
+        # Create a new linked list from the sorted merged list
+        head = ListNode(None)
+        current = head
+        
+        # Iterate over the sorted merged list and create a new linked list
+        for val in merged_list:
+            new_node = ListNode(val)
+            if not head:
+                head = new_node
             else:
-                break
-        
-        # Merge the sorted lists
-        current = dummy.next
-        while current.next:
-            min_val = current.val
-            min_index = current.index(min_val)
-            current.val = min_val
-            current = current.next
-            for i in range(min_index):
+                current.next = new_node
                 current = current.next
         
-        return dummy.next
+        # Return the head of the new linked list (excluding the dummy node)
+        return head.next
