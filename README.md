@@ -31,7 +31,7 @@ Make env files `key.env` and `.env`. In `.env`, store your [HuggingFace access t
 
 ### Dataset Structure
 
-The dataset, stored in `lc_hard.json` is comprised of Hard difficulty problems from [LeetCode](https://leetcode.com/problemset/). 
+The dataset, stored in `lc_hard.json`, is comprised of Hard difficulty problems from [LeetCode](https://leetcode.com/problemset/). 
 
 As it stands, there are 50 entries; the first 20 are from questions that are asked much more frequently in real life technical interviews, and the remaining 30 are selected from the set of other Hard problems on LeetCode.
 
